@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment : Fragment(), AlbumsOnClick {
     lateinit var binding: FragmentProfileBinding
     lateinit var viewModel: ProfileViewModel
-    lateinit var nav:NavController
+    lateinit var nav: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -27,7 +27,7 @@ class ProfileFragment : Fragment(), AlbumsOnClick {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
         binding.viewModel = viewModel
@@ -49,11 +49,7 @@ class ProfileFragment : Fragment(), AlbumsOnClick {
         binding.tvRetry.setOnClickListener {
             viewModel.excute()
         }
-
-
     }
-
-
 
     private fun checkConnection() {
         viewModel.noConnection.observe(viewLifecycleOwner) {
@@ -67,7 +63,8 @@ class ProfileFragment : Fragment(), AlbumsOnClick {
                 binding.textView.visibility = View.VISIBLE
                 binding.textView2.visibility = View.VISIBLE
             }
-        }    }
+        }
+    }
 
     override fun onClick(album: AlbumsItem) {
         val action = ProfileFragmentDirections.actionProfileFragmentToGalleryFragment(album.id!!)

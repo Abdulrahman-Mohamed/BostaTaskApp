@@ -45,7 +45,6 @@ class GalleryFragment : Fragment(), ImagesOnClick {
         nav = findNavController()
         binding.root.visibility = View.GONE
         checkConnection()
-
         if (args != null) {
             viewModel.getImagesList(args.id)
             binding.tvRetry.setOnClickListener {
@@ -79,6 +78,8 @@ class GalleryFragment : Fragment(), ImagesOnClick {
 
     override fun onClick(images: ImagesItem) {
        val action = GalleryFragmentDirections.actionGalleryFragmentToImageFragment(images.url!!)
+        binding.etSearchBar.setText(null)
+
         nav.navigate(action)
     }
 

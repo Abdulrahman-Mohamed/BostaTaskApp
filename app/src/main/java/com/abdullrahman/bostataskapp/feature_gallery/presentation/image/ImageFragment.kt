@@ -15,7 +15,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.navArgs
 import com.abdullrahman.bostataskapp.R
 import com.abdullrahman.bostataskapp.databinding.FragmentImageBinding
-import com.abdullrahman.bostataskapp.feature_gallery.presentation.gallery.GalleryFragmentArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
@@ -34,8 +33,7 @@ class ImageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_image, container, false)
         return binding.root
     }
@@ -58,7 +56,6 @@ class ImageFragment : Fragment() {
             .load(url)
             .fitCenter()
             .into(binding.touchy)
-
     }
 
     private fun shareImageandText(bitmap: Bitmap) {

@@ -38,7 +38,6 @@ fun ConcatStrings(text: TextView, user: User?) {
 fun Search(et: EditText, viewModel: GalleryViewModel) {
     et.addTextChangedListener(object : TextWatcher{
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -92,14 +91,5 @@ fun setText(tv: TextView, resource: String?) {
     if (resource !=  null)
         tv.text = resource
 }
-//@BindingAdapter("touch_src")
-//fun setTouch(imageView: TouchImageView, url: String) {
-//    val url =
-//        GlideUrl(url, LazyHeaders.Builder().addHeader("User-Agent", "your-user-agent").build())
-//
-//    Glide.with(imageView.context)
-//        .load(url)
-//        .fitCenter()
-//        .into(imageView)
-//}
+
 

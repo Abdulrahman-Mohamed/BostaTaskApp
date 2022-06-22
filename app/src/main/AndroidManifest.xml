@@ -23,14 +23,9 @@
         </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
-
             android:authorities="com.abdullrahman.bostataskapp.fileprovider"
-
             android:exported="false"
             android:grantUriPermissions="true">
-            <!-- we intend to request content
-                  URIs for the images/subdirectory
-                  of your private file area -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/paths" />

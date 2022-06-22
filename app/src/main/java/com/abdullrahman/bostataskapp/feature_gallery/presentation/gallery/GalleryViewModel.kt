@@ -42,7 +42,7 @@ class GalleryViewModel @Inject constructor(
     }
     fun search(search:String?)
     {
-        if (search != null || search !=""){
+        if (search != null && search !=""){
             imagesList.value = allimagesList.value!!.filter { image-> image!!.title!!.contains(search!!)  }
         }else{
             SetImagesList()
