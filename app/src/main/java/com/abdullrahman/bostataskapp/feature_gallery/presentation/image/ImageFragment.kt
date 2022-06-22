@@ -1,7 +1,9 @@
 package com.abdullrahman.bostataskapp.feature_gallery.presentation.image
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -41,6 +43,9 @@ class ImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (args != null){
+            binding.tvRetry.setOnClickListener {
+                loadImage(args.url)
+            }
             loadImage(args.url)
             binding.share.setOnClickListener {
                 val bitmap = binding.touchy.drawable.toBitmap()
@@ -49,13 +54,27 @@ class ImageFragment : Fragment() {
     }}
 
     private fun loadImage(urlString: String) {
-        val url =
-            GlideUrl(urlString, LazyHeaders.Builder().addHeader("User-Agent", "your-user-agent").build())
+        if (isNetworkConnected() && internetIsConnected()) {
+            val url =
+                GlideUrl(
+                    urlString,
+                    LazyHeaders.Builder().addHeader("User-Agent", "your-user-agent").build()
+                )
 
-        Glide.with(requireContext())
-            .load(url)
-            .fitCenter()
-            .into(binding.touchy)
+            Glide.with(requireContext())
+                .load(url)
+                .fitCenter()
+                .into(binding.touchy)
+            binding.touchy.visibility = View.VISIBLE
+            binding.share.visibility = View.VISIBLE
+            binding.tvRetry.visibility = View.GONE
+        }else{
+            Toast.makeText(requireContext(),"Check internet Connection",Toast.LENGTH_SHORT).show()
+            binding.touchy.visibility = View.GONE
+            binding.share.visibility = View.GONE
+            binding.tvRetry.visibility = View.VISIBLE
+
+        }
     }
 
     private fun shareImageandText(bitmap: Bitmap) {
@@ -83,5 +102,18 @@ class ImageFragment : Fragment() {
             Toast.makeText(requireContext(), "" + e.message, Toast.LENGTH_LONG).show()
         }
         return uri
+    }
+    private fun isNetworkConnected(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null
+    }
+
+    fun internetIsConnected(): Boolean {
+        return try {
+            val command = "ping -c 1 google.com"
+            Runtime.getRuntime().exec(command).waitFor() == 0
+        } catch (e: Exception) {
+            false
+        }
     }
 }
