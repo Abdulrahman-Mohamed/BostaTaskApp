@@ -30,7 +30,7 @@ class ProfileViewModel @Inject constructor(
 
     fun excute() {
         getUserData()
-        // getAlbumData(userData.value!!.id!!)
+
     }
 
     private fun getUserData() {
