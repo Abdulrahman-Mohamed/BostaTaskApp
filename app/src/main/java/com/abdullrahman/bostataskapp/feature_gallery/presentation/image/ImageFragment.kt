@@ -53,6 +53,7 @@ class ImageFragment : Fragment() {
             }
     }}
 
+    /*Load the image after checking the internet*/
     private fun loadImage(urlString: String) {
         if (isNetworkConnected() && internetIsConnected()) {
             val url =
@@ -76,7 +77,7 @@ class ImageFragment : Fragment() {
 
         }
     }
-
+    /*prepare intent params for sharing the image and starting a service of sharing to available resources*/
     private fun shareImageandText(bitmap: Bitmap) {
         val uri: Uri? = getmageToShare(bitmap)
         val intent = Intent(Intent.ACTION_SEND)
@@ -86,7 +87,7 @@ class ImageFragment : Fragment() {
         intent.type = "image/png"
         startActivity(Intent.createChooser(intent, "Share Via"))
     }
-
+    /* saving the image temporarly into a cash storage as png in order of sharing it*/
     private fun getmageToShare(bitmap: Bitmap): Uri? {
         val imagefolder = File(requireActivity().cacheDir, "images")
         var uri: Uri? = null
@@ -103,11 +104,12 @@ class ImageFragment : Fragment() {
         }
         return uri
     }
+    /*checking if device has a connection to a certain network*/
     private fun isNetworkConnected(): Boolean {
         val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo != null
     }
-
+    /*checking if device has a internet connection*/
     fun internetIsConnected(): Boolean {
         return try {
             val command = "ping -c 1 google.com"

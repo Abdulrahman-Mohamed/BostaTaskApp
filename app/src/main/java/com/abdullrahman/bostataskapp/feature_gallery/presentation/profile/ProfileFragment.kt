@@ -47,10 +47,11 @@ class ProfileFragment : Fragment(), AlbumsOnClick {
         }
 
         binding.tvRetry.setOnClickListener {
-            viewModel.excute()
+            viewModel.execute()
         }
     }
 
+    /*check internet connection*/
     private fun checkConnection() {
         viewModel.noConnection.observe(viewLifecycleOwner) {
             if (it) {
@@ -65,7 +66,7 @@ class ProfileFragment : Fragment(), AlbumsOnClick {
             }
         }
     }
-
+    /*on item clicked in the recycler pass album_id and navigate to next fragment*/
     override fun onClick(album: AlbumsItem) {
         val action = ProfileFragmentDirections.actionProfileFragmentToGalleryFragment(album.id!!)
         nav.navigate(action)

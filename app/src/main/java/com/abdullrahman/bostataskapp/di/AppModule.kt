@@ -46,28 +46,8 @@ object AppModule {
 
     @Provides
     fun provideMainRepo(
-        @ApplicationContext appContext: Context,
         api: Api,
-    ): MainRepoImp = MainRepoImp(appContext, api)
+    ): MainRepoImp = MainRepoImp(api)
 
-//    @Provides
-//    @ViewModelScoped
-//    fun ProvidesUserUseCases(
-//        @ApplicationContext appContext: Context,
-//        mainRepo: MainRepoImp
-//    ): GetUserUseCase = GetUserUseCase(appContext, mainRepo)
-//
-//    @Provides
-//    @ViewModelScoped
-//    fun ProvidesAlbumsUseCases(
-//        @ApplicationContext appContext: Context,
-//        mainRepo: MainRepoImp
-//    ): GetAlbumsUseCase = GetAlbumsUseCase(appContext, mainRepo)
-//
-//    @Provides
-//    @ViewModelScoped
-//    fun ProvidesImagesUseCases(
-//        @ApplicationContext appContext: Context,
-//        mainRepo: MainRepoImp
-//    ): GetImagesUseCase = GetImagesUseCase(appContext, mainRepo)
+
 }

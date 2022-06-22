@@ -59,7 +59,7 @@ class GalleryFragment : Fragment(), ImagesOnClick {
         }
 
     }
-
+    /*check internet connection*/
     private fun checkConnection() {
       viewModel.noConnection.observe(viewLifecycleOwner){
           if (it){
@@ -75,11 +75,10 @@ class GalleryFragment : Fragment(), ImagesOnClick {
       }
 
     }
-
+    /*on item clicked in the recycler  pass Image_url and navigate to next fragment */
     override fun onClick(images: ImagesItem) {
        val action = GalleryFragmentDirections.actionGalleryFragmentToImageFragment(images.url!!)
         binding.etSearchBar.setText(null)
-
         nav.navigate(action)
     }
 

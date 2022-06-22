@@ -9,7 +9,6 @@ import com.abdullrahman.bostataskapp.feature_gallery.domain.models.User
 import com.abdullrahman.bostataskapp.feature_gallery.presentation.profile.useCases.GetAlbumsUseCase
 import com.abdullrahman.bostataskapp.feature_gallery.presentation.profile.useCases.GetUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,27 +18,27 @@ class ProfileViewModel @Inject constructor(
     private val albumsUseCase: GetAlbumsUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    val userData: MutableLiveData<User> = MutableLiveData<User>()
+    val userInfoData: MutableLiveData<User> = MutableLiveData<User>()
     val albumsData: MutableLiveData<List<AlbumsItem?>?> = MutableLiveData<List<AlbumsItem?>?>()
     val noConnection = MutableLiveData<Boolean>(false)
     val isLoading = MutableLiveData<Boolean>(true)
 
     init {
-        excute()
+        execute()
     }
-
-    fun excute() {
+    /* execute fetching profile data*/
+    fun execute() {
         getUserData()
 
     }
-
+    /* fetching user data*/
     private fun getUserData() {
         viewModelScope.launch {
             val user = userUseCase()
 
             if (user != null) {
-                userData.value = user
-                getAlbumData(userData.value!!.id!!)
+                userInfoData.value = user
+                getAlbumData(userInfoData.value!!.id!!)
                 noConnection.value = false
 
             } else {
@@ -49,7 +48,7 @@ class ProfileViewModel @Inject constructor(
             }
         }
     }
-
+    /* fetching albums from user_id */
     private fun getAlbumData(userID: Long) {
         viewModelScope.launch {
             albumsData.value = albumsUseCase(userID)

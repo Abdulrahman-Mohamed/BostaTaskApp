@@ -34,6 +34,7 @@ fun ConcatStrings(text: TextView, user: User?) {
 
     }
 }
+/* search for a title by passing the text to the viewModel */
 @BindingAdapter("search")
 fun Search(et: EditText, viewModel: GalleryViewModel) {
     et.addTextChangedListener(object : TextWatcher{

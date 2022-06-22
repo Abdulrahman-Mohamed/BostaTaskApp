@@ -17,9 +17,9 @@ import java.io.IOException
 import javax.inject.Inject
 
 class MainRepoImp @Inject constructor(
-    @ApplicationContext val context: Context,
     val api: Api,
 ) : MainRepo {
+    /* get and handle the one user information based on id from api*/
     override suspend fun getUser(userId: Long): Response<User> {
             return try {
                 val result = api.getUser(userId)
@@ -39,6 +39,7 @@ class MainRepoImp @Inject constructor(
 
             }
     }
+    /* get and handle the all the users information based on id from api*/
 
     override suspend fun getAllUsers(): Response<List<User>> {
         return try {
@@ -59,6 +60,7 @@ class MainRepoImp @Inject constructor(
         }
 
     }
+    /* get and handle albums information based on user_id from api*/
 
     override suspend fun getAlbums(userId: Long): Response<List<AlbumsItem?>?> {
         return try {
@@ -78,6 +80,7 @@ class MainRepoImp @Inject constructor(
         }
 
     }
+    /* get and handle images information based on Album_id from api*/
 
     override suspend fun getPhotos(albumId: Long): Response<List<ImagesItem?>?> {
         return try {

@@ -9,6 +9,8 @@ import com.abdullrahman.bostataskapp.feature_gallery.repository.MainRepoImp
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
+/* this class is responsible for get response of Albums or error from repo and either emit it or display the message
+* it toke a user id as parameter */
 class GetAlbumsUseCase@Inject constructor(
     @ApplicationContext val context: Context,
     private val mainRepo: MainRepoImp

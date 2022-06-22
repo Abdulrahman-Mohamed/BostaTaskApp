@@ -8,6 +8,8 @@ import com.abdullrahman.bostataskapp.feature_gallery.domain.utils.Response
 import com.abdullrahman.bostataskapp.feature_gallery.repository.MainRepoImp
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+/* this class is responsible for get response of Users or error from repo ,
+ either fetch a random user and  emit it or display the message */
 
 class GetUserUseCase @Inject constructor(
     @ApplicationContext val context: Context,

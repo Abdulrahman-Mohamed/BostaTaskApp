@@ -20,7 +20,7 @@ class GalleryViewModel @Inject constructor(
     var imagesList = MutableLiveData<List<ImagesItem?>?>()
     val isLoading = MutableLiveData<Boolean>(true)
     val noConnection = MutableLiveData<Boolean>(false)
-
+    /* this function is responsible of fetching the images from the use_case and post it to the livedata*/
      fun getImagesList(id:Long){
         viewModelScope.launch {
             isLoading.value = true
@@ -28,6 +28,8 @@ class GalleryViewModel @Inject constructor(
             SetImagesList()
         }
     }
+    /* this function is responsible of checking if the list of images is empty or not ,
+     also copy the list to the actual list that would be modified and displayed without change in the original list*/
     private fun SetImagesList()
     {
         if (!allimagesList.value.isNullOrEmpty())
@@ -40,6 +42,8 @@ class GalleryViewModel @Inject constructor(
         }
         isLoading.value = false
     }
+    /* this function is filtering the main list based on the searched title and coby that to the displayed list
+    * search_string as a parameter  */
     fun search(search:String?)
     {
         if (search != null && search !=""){
